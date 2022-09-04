@@ -249,6 +249,73 @@ def testFunctions(tokenDict):
                 errorMessages.append(f"Syntax: Error al declarar nombre función (ln:{tupleError[2]}, col:{tupleError[1]})")
 
 
+
+def testKeys(tokenDict):
+
+    errorMessages = []
+    tokenTuples = tokenDict["tokenTuples"]
+
+    for i in range(0,len(tokenTuples)):
+        token = tokenTuples[i][0]
+        tokenCol = tokenTuples[i][1]
+        tokenLn = tokenTuples[i][2]
+
+        if token == "":
+
+            pos = 
+
+
+def testParentesis(tokenDict):
+
+    errorMessages = []
+    tokenTuples = tokenDict["tokenTuples"]
+
+    for i in range(0,len(tokenTuples)):
+        token = tokenTuples[i][0]
+        tokenCol = tokenTuples[i][1]
+        tokenLn = tokenTuples[i][2]
+
+        markedPar = []
+
+        if token == "leftParenthesis":
+
+            RParenthesis = False
+
+            for j in range(0,len(tokenTuples)):
+
+                if (tokenTuples[j][0] == "rightParenthesis") and (tokenTuples[j][2] == tokenLn):
+
+                    RParenthesis = True
+                    RPLn = tokenTuples[j][2]
+                    RPCol = tokenTuples[j][1]
         
+            if not(RParenthesis):
+
+                errorMessages.append(f"Syntax: Error de cierre de paréntesis (ln:{tokenLn}, col:{tokenCol})")
+
+            if RParenthesis and (RPCol < tokenCol):
+
+                errorMessages.append(f"Syntax: Error de cierre de paréntesis (ln:{RPLn}, col:{tokenTuples[j][1]})")
+
+            if RParenthesis and (RPCol > tokenCol):
+
+                if (RPLn,RPCol) in markedPar:
+
+                    errorMessages.append(f"Syntax: Error de cierre de paréntesis (ln:{tokenLn}, col:{tokenCol})")
+                
+                else:
+
+                    markedPar.append((RPLn,RPCol))
+
+        elif (token == "rightParenthesis") and ((tokenCol,tokenLn) not in markedPar):
+
+                errorMessages.append(f"Syntax: Error de cierre de paréntesis (ln:{tokenLn}, col:{tokenCol})")
+
+
+
+
+
+
+
 
                 
