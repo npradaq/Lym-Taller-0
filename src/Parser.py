@@ -16,7 +16,8 @@ def testSyntax(tokenDict):
     #comprobar apertura y cierre llaves
 
     #comprobar apertura y cierre parentesis
-
+    OpenCloseParenthesisErrorMessages = testParentesis(tokenDict)
+    
     #comprobar comandos
 
 
@@ -260,9 +261,9 @@ def testKeys(tokenDict):
         tokenCol = tokenTuples[i][1]
         tokenLn = tokenTuples[i][2]
 
-        if token == "":
+        if token == "leftBracket":
 
-            pos = 
+            pos
 
 
 def testParentesis(tokenDict):
@@ -310,6 +311,8 @@ def testParentesis(tokenDict):
         elif (token == "rightParenthesis") and ((tokenCol,tokenLn) not in markedPar):
 
                 errorMessages.append(f"Syntax: Error de cierre de paréntesis (ln:{tokenLn}, col:{tokenCol})")
+    
+    return errorMessages
 
 
 
