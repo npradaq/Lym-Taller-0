@@ -14,9 +14,10 @@ def testSyntax(tokenDict):
     #comprobar declaración funciones
 
     #comprobar apertura y cierre llaves
+    OpenCloseBracketsErrorMessages = testBrackets(tokenDict)
 
     #comprobar apertura y cierre parentesis
-    OpenCloseParenthesisErrorMessages = testParentesis(tokenDict)
+    OpenCloseParenthesisErrorMessages = testParenthesis(tokenDict)
     
     #comprobar comandos
 
@@ -251,7 +252,7 @@ def testFunctions(tokenDict):
 
 
 
-def testKeys(tokenDict):
+def testBrackets(tokenDict):
 
     errorMessages = []
     tokenTuples = tokenDict["tokenTuples"]
@@ -261,12 +262,46 @@ def testKeys(tokenDict):
         tokenCol = tokenTuples[i][1]
         tokenLn = tokenTuples[i][2]
 
+        markedBrack = []
+
         if token == "leftBracket":
 
-            pos
+            RBracket = False
+
+            for j in range(0, len(tokenTuples)):
+
+                if (tokenTuples[j][0] == "rightBracket") and (tokenTuples[j][1] == tokenCol):
+
+                    RBracket = True
+                    RBLn = tokenTuples[j][2]
+                    RBCol = tokenTuples[j][1]
+        
+            if not(RBracket):
+
+                errorMessages.append(f"Syntax: Error de cierre de llaves (ln:{tokenLn}, col:{tokenCol})")
+
+            if RBracket and (RBLn < tokenLn):
+
+                errorMessages.append(f"Syntax: Error de cierre de llave (ln:{RBLn}, col:{RBCol})")
+
+            if RBracket and (RBLn > tokenLn):
+
+                if (RBLn,RBCol) in markedBrack:
+
+                    errorMessages.append(f"Syntax: Error de cierre de llave (ln:{tokenLn}, col:{tokenCol})")
+                
+                else:
+
+                    markedBrack.append((RBLn,RBCol))
+
+        elif (token == "rightBracket") and ((tokenCol,tokenLn) not in markedBrack):
+
+                errorMessages.append(f"Syntax: Error de cierre de llave (ln:{tokenLn}, col:{tokenCol})")
+    
+    return errorMessages
 
 
-def testParentesis(tokenDict):
+def testParenthesis(tokenDict):
 
     errorMessages = []
     tokenTuples = tokenDict["tokenTuples"]
@@ -296,7 +331,7 @@ def testParentesis(tokenDict):
 
             if RParenthesis and (RPCol < tokenCol):
 
-                errorMessages.append(f"Syntax: Error de cierre de paréntesis (ln:{RPLn}, col:{tokenTuples[j][1]})")
+                errorMessages.append(f"Syntax: Error de cierre de paréntesis (ln:{RPLn}, col:{RPCol})")
 
             if RParenthesis and (RPCol > tokenCol):
 
