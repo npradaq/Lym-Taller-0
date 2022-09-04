@@ -3,7 +3,7 @@ VAR n, x, y;
 
 PROC putCB(c, b)
 {
-drop( c );
+drop(c);
 free( b );
 walk(n)
 }
@@ -11,19 +11,19 @@ CORP
 
 PROC goNorth()
 {
-while ( canWalk(north, 1) ) do{ walk( north ,1) } od
+while( canWalk(North, 1) ) do{ walk( North ,1) } od
 }
 CORP
 
 PROC goWest()
 {
-if ( canWalk ( west ,1) ) { walk( west ,1) } fi
+if(canWalk(West ,1)) { walk(West ,1) } fi
 }
 CORP
 
 {
-go (3 ,3);
-n =6;
-putCB (2 ,1)
+walk(3 ,3);
+n = 6;
+putCB(2 ,1)
 }
 GORP
