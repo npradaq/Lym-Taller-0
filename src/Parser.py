@@ -37,6 +37,7 @@ def testSyntax(tokenDict):
     
     #comprobar variables funciones y parámetros
     variablesProceduresParametersErrorMessages = testVariablesAndFunctions(tokenDict, parameterList)
+    OpenCloseBracketsErrorMessages = testBrackets(tokenDict)
 
     #comprobar condicionales
     conditionalErrors = testConditionals(tokenDict, conditionalList, conditionalStructures, parameterList)
