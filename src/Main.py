@@ -1,22 +1,34 @@
 import Lexer
 import Parser
 
-file = open("./data/test.txt", "r")
+def testFile():
+    fileName = input("Ingrese el nombre del archivo que desea comprobar (en la carpeta ./data): ")
+    openedFile = open(f"./data/{fileName}", "r")
 
-characters = []
+    testReturn = True
 
-for line in file:
-    for character in line:
-        characters.append(character)
+    characters = []
 
-tokenDict = Lexer.tokenCreator(characters)
-tokenList = tokenDict["tokens"]
+    for line in openedFile:
+        for character in line:
+            characters.append(character)
 
-#for i in characters:
-#    print(i)
+    tokenDict = Lexer.tokenCreator(characters)
+    errors = Parser.testSyntax(tokenDict)
 
-for i in tokenList:
-    print(i)
+    if len(errors) > 0:
+        testReturn = False
+        for error in errors:
+            print(error)
+
+    else:
+        testReturn = True
+        print("No se encontraron errores en el código")
 
 
-file.close()
+    openedFile.close()
+
+    return testReturn
+
+    
+testFile()

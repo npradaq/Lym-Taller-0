@@ -10,7 +10,7 @@ def tokenCreator(characterList):
     tokenMaker = ""
     returnToken = ""
 
-    numLine = 0
+    numLine = 1
     numChar = 0
 
     for char in characterList:
@@ -201,16 +201,16 @@ def checkToken(stringToken):
     #east
     #south
     #west
-    elif(stringToken == "North"):
+    elif(stringToken == "North" or stringToken == "north"):
         returnToken = "northCompass"
 
-    elif(stringToken == "East"):
+    elif(stringToken == "East" or stringToken == "east"):
         returnToken = "eastCompass"
 
-    elif(stringToken == "South"):
+    elif(stringToken == "South" or stringToken == "south"):
         returnToken = "southCompass"
 
-    elif(stringToken == "West"):
+    elif(stringToken == "West" or stringToken == "west"):
         returnToken = "westCompass"
 
     #direcciones:
@@ -275,10 +275,6 @@ def checkToken(stringToken):
     elif(stringToken == "pop"):
         returnToken = "popFunc"
 
-    #walk
-    elif(stringToken == "walk"):
-        returnToken = "walkFunc"
-
     #inicio if
     elif(stringToken == "if"):
         returnToken = "startIf"
@@ -321,9 +317,6 @@ def checkToken(stringToken):
 
     elif(stringToken == "isValid"):
         returnToken = "condValid"
-
-    elif(stringToken == "drop"):
-        returnToken = "condDrop"
 
     elif(stringToken == "canWalk"):
         returnToken = "condWalk"
